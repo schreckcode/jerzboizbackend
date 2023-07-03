@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>278415717353-h19bkfa3ctt4sgp5dp07rbnvbkjdb20u.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.278415717353-h19bkfa3ctt4sgp5dp07rbnvbkjdb20u</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDz_YGH8XFIwgyfBAy7u5cdbSarf_BoTnQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>278415717353</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.trixtoo.jerZboiz</string>
+	<key>PROJECT_ID</key>
+	<string>jerzboiz</string>
+	<key>STORAGE_BUCKET</key>
+	<string>jerzboiz.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:278415717353:ios:d75908183fdff98cb95178</string>
+</dict>
+</plist>

@@ -11,6 +11,7 @@
 		CD88AC312A5348230065AFD5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88AC302A5348230065AFD5 /* ContentView.swift */; };
 		CD88AC332A5348260065AFD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD88AC322A5348260065AFD5 /* Assets.xcassets */; };
 		CD88AC362A5348260065AFD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD88AC352A5348260065AFD5 /* Preview Assets.xcassets */; };
+		CD88AC3D2A5353DD0065AFD5 /* GoogleService-Info-2.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD88AC3C2A5353DD0065AFD5 /* GoogleService-Info-2.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		CD88AC302A5348230065AFD5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CD88AC322A5348260065AFD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD88AC352A5348260065AFD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CD88AC3C2A5353DD0065AFD5 /* GoogleService-Info-2.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-2.plist"; path = "jerZboiz/GoogleService-Info-2.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +55,7 @@
 			children = (
 				CD88AC2E2A5348230065AFD5 /* jerZboizApp.swift */,
 				CD88AC302A5348230065AFD5 /* ContentView.swift */,
+				CD88AC3C2A5353DD0065AFD5 /* GoogleService-Info-2.plist */,
 				CD88AC322A5348260065AFD5 /* Assets.xcassets */,
 				CD88AC342A5348260065AFD5 /* Preview Content */,
 			);
@@ -111,6 +114,9 @@
 				Base,
 			);
 			mainGroup = CD88AC222A5348230065AFD5;
+			packageReferences = (
+				CD88AC3E2A53542D0065AFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = CD88AC2C2A5348230065AFD5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +133,7 @@
 			files = (
 				CD88AC362A5348260065AFD5 /* Preview Assets.xcassets in Resources */,
 				CD88AC332A5348260065AFD5 /* Assets.xcassets in Resources */,
+				CD88AC3D2A5353DD0065AFD5 /* GoogleService-Info-2.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +346,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CD88AC3E2A53542D0065AFD5 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = CD88AC232A5348230065AFD5 /* Project object */;
 }
