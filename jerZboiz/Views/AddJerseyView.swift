@@ -1,5 +1,6 @@
 import SwiftUI
 import os
+import Firebase
 import FirebaseStorage
 
 struct AddJerseyView: View {
@@ -97,12 +98,25 @@ struct AddJerseyView: View {
 
 func addJersey(frontPic: Image, backPic: Image) {
     let msec: String = String(Date().millisecondsSince1970)
-    
+    let util = UserUtility()
+    let userName = util.getUserFromEmail(email: Auth.auth().currentUser?.email ?? "")
+    let storage = FirebaseStorage.Storage.storage()
+    let storageRef = storage.reference().child("brock")
+    storageRef.listAll { (result, error) in
+            if let error = error {
+                    print("Error while listing all files: ", error)
+            }
+
+            for item in result!.items {
+                    print("Item in images folder: ", item)
+            }
+    }
     // Filenames will be
         // <person>/<msec>_front.jpg
         // <person>/<msec>_back.jpg
 }
-
+class StorageManager: ObservableObject {
+}
 extension Date {
     var millisecondsSince1970: Int64 {
         Int64((self.timeIntervalSince1970 * 1000.0).rounded())

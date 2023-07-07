@@ -19,10 +19,6 @@
 		2827BA862A5772BD00342499 /* FirebaseInAppMessagingSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = 2827BA852A5772BD00342499 /* FirebaseInAppMessagingSwift-Beta */; };
 		2827BA882A5772BD00342499 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 2827BA872A5772BD00342499 /* FirebaseStorage */; };
 		2827BA8F2A57753F00342499 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BA8E2A57753F00342499 /* Fonts.swift */; };
-		2827BAAA2A577B0300342499 /* academic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2827BAA42A577AD800342499 /* academic.ttf */; };
-		2827BAAB2A577B0300342499 /* bulls.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2827BAA62A577AD800342499 /* bulls.ttf */; };
-		2827BAAE2A577B7800342499 /* ComicSansBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2827BAAC2A577B7800342499 /* ComicSansBold.ttf */; };
-		2827BAAF2A577B7800342499 /* ComicSans.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2827BAAD2A577B7800342499 /* ComicSans.ttf */; };
 		2827BAB22A578F1200342499 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB12A578F1200342499 /* MainView.swift */; };
 		2827BAB42A578F2800342499 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB32A578F2800342499 /* DataManager.swift */; };
 		2827BAB62A578F7C00342499 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB52A578F7C00342499 /* MyProfileView.swift */; };
@@ -32,16 +28,13 @@
 		CD88AC332A5348260065AFD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD88AC322A5348260065AFD5 /* Assets.xcassets */; };
 		CD88AC362A5348260065AFD5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD88AC352A5348260065AFD5 /* Preview Assets.xcassets */; };
 		CD88AC3D2A5353DD0065AFD5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CD88AC3C2A5353DD0065AFD5 /* GoogleService-Info.plist */; };
+		CD9632A52A57A98A00317E0C /* UserUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD9632A42A57A98A00317E0C /* UserUtility.swift */; };
+		CD9632B32A57B95E00317E0C /* bulls.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD9632B22A57B95E00317E0C /* bulls.ttf */; };
+		CD9632B52A57BA4700317E0C /* NBA Bulls.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD9632B42A57BA4700317E0C /* NBA Bulls.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2827BA8C2A57738700342499 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2827BA8E2A57753F00342499 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		2827BAA42A577AD800342499 /* academic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = academic.ttf; sourceTree = "<group>"; };
-		2827BAA52A577AD800342499 /* NBA Bulls.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NBA Bulls.ttf"; sourceTree = "<group>"; };
-		2827BAA62A577AD800342499 /* bulls.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bulls.ttf; sourceTree = "<group>"; };
-		2827BAAC2A577B7800342499 /* ComicSansBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicSansBold.ttf; sourceTree = "<group>"; };
-		2827BAAD2A577B7800342499 /* ComicSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ComicSans.ttf; sourceTree = "<group>"; };
 		2827BAB12A578F1200342499 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2827BAB32A578F2800342499 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2827BAB52A578F7C00342499 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
@@ -52,6 +45,10 @@
 		CD88AC322A5348260065AFD5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD88AC352A5348260065AFD5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CD88AC3C2A5353DD0065AFD5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "jerZboiz/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		CD9632A42A57A98A00317E0C /* UserUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUtility.swift; sourceTree = "<group>"; };
+		CD9632A62A57ABBA00317E0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CD9632B22A57B95E00317E0C /* bulls.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bulls.ttf; sourceTree = "<group>"; };
+		CD9632B42A57BA4700317E0C /* NBA Bulls.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NBA Bulls.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				2827BA8E2A57753F00342499 /* Fonts.swift */,
+				CD9632A42A57A98A00317E0C /* UserUtility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -87,21 +85,10 @@
 		2827BA9C2A577AC800342499 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2827BAAD2A577B7800342499 /* ComicSans.ttf */,
-				2827BAAC2A577B7800342499 /* ComicSansBold.ttf */,
-				2827BAA32A577AD800342499 /* Fonts */,
+				CD9632B42A57BA4700317E0C /* NBA Bulls.ttf */,
+				CD9632B22A57B95E00317E0C /* bulls.ttf */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		2827BAA32A577AD800342499 /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				2827BAA42A577AD800342499 /* academic.ttf */,
-				2827BAA52A577AD800342499 /* NBA Bulls.ttf */,
-				2827BAA62A577AD800342499 /* bulls.ttf */,
-			);
-			name = Fonts;
 			sourceTree = "<group>";
 		};
 		2827BAB02A578F0400342499 /* Views */ = {
@@ -137,12 +124,12 @@
 				2827BAB02A578F0400342499 /* Views */,
 				2827BA9C2A577AC800342499 /* Resources */,
 				2827BA8D2A57753000342499 /* Utilities */,
-				2827BA8C2A57738700342499 /* Info.plist */,
 				CD88AC2E2A5348230065AFD5 /* jerZboizApp.swift */,
 				CD88AC3C2A5353DD0065AFD5 /* GoogleService-Info.plist */,
 				CD88AC322A5348260065AFD5 /* Assets.xcassets */,
 				CD88AC342A5348260065AFD5 /* Preview Content */,
 				2827BAB32A578F2800342499 /* DataManager.swift */,
+				CD9632A62A57ABBA00317E0C /* Info.plist */,
 			);
 			path = jerZboiz;
 			sourceTree = "<group>";
@@ -232,13 +219,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2827BAAA2A577B0300342499 /* academic.ttf in Resources */,
-				2827BAAB2A577B0300342499 /* bulls.ttf in Resources */,
 				CD88AC362A5348260065AFD5 /* Preview Assets.xcassets in Resources */,
+				CD9632B52A57BA4700317E0C /* NBA Bulls.ttf in Resources */,
 				CD88AC332A5348260065AFD5 /* Assets.xcassets in Resources */,
-				2827BAAF2A577B7800342499 /* ComicSans.ttf in Resources */,
-				2827BAAE2A577B7800342499 /* ComicSansBold.ttf in Resources */,
 				CD88AC3D2A5353DD0065AFD5 /* GoogleService-Info.plist in Resources */,
+				CD9632B32A57B95E00317E0C /* bulls.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,6 +241,7 @@
 				2827BA8F2A57753F00342499 /* Fonts.swift in Sources */,
 				2827BAB62A578F7C00342499 /* MyProfileView.swift in Sources */,
 				CD88AC2F2A5348230065AFD5 /* jerZboizApp.swift in Sources */,
+				CD9632A52A57A98A00317E0C /* UserUtility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,7 +374,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = jerZboiz/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = NO;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -418,7 +403,6 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = jerZboiz/Info.plist;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = NO;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
