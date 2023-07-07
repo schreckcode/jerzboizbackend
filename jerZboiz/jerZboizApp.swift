@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct jerZboizApp: App {
+    
+    init() {
+        FirebaseApp.configure()
+
+        UIFont.overrideInitialize()
+    }
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
         }
     }
 }
