@@ -2,9 +2,9 @@ import Foundation
 import UIKit
 
 struct AppFontName {
-  static let regular = "NBABulls"
-  static let bold = "NBABulls"
-  static let lightAlt = "NBABulls"
+  static let regular = "Avenir-Book"
+  static let bold = "Avenir-Book"
+  static let lightAlt = "Avenir-Book"
 }
 //customise font
 extension UIFontDescriptor.AttributeName {

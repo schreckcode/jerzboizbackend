@@ -10,7 +10,8 @@ import Firebase
 
 @main
 struct jerZboizApp: App {
-    
+    @StateObject var dataManager = DataManager()
+
     init() {
         // put the following into the .onAppear of a top level view or App.init
             // get each of the font families
@@ -26,6 +27,8 @@ struct jerZboizApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environmentObject(dataManager)
+
         }
     }
 }

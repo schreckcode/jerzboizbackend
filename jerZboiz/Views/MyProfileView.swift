@@ -14,32 +14,21 @@ struct MyProfileView: View {
     @State private var email = ""
     @State private var password = ""
     @State private var userIsLoggedIn = false
-
+    @State private var selection: String? = nil
+    
     var body: some View {
         let user = Auth.auth().currentUser;
-
-        if (user == nil) {
-            content
-        } else {
-            TabView {
-                ContentView()
-                    .tabItem {
-                        Label("Rank Js", systemImage: "carrot")
-                    }
-                ContentView()
-                    .tabItem {
-                        Label("Edit My Js", systemImage: "wineglass")
-                    }
-                AddJerseyView()
-                    .tabItem {
-                        Label("Add New J", systemImage: "appple")
-                    }
-                if (user?.email == "pat@pat.com") {
-                    ContentView()
-                        .tabItem {
-                            Label("Admin Menu", systemImage:
-                            "8.circle")
-                        }
+        NavigationView {
+            if (user == nil) {
+                content
+            } else {
+                VStack {
+                    let _ = Logger().info("Selection \(selection ?? "null")")
+                    Spacer()
+                    NavigationLink("Add Jersey") { AddJerseyView() }
+                    Spacer()
+                    NavigationLink("Something Else Jersey") { ContentView() }
+                    Spacer()
                 }
             }
         }

@@ -13,14 +13,14 @@ struct MainView: View {
 
     var body: some View {
         TabView {
-            ContentView()
+            UserJerseyListView()
                 .tabItem {
                     Label("J Rankings", systemImage: "figure.pickleball")
                 }
-            MyProfileView()
-                .tabItem {
-                    Label("My Js", systemImage: "square.and.pencil")
-                }
+                MyProfileView()
+                    .tabItem {
+                        Label("My Js", systemImage: "square.and.pencil")
+                    }
         }.toolbar(.visible)
     }
 }
