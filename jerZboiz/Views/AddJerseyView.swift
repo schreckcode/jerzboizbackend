@@ -185,6 +185,28 @@ struct AddJerseyView: View {
         }
             
     }
+    func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
+        let size = image.size
+        
+        let widthRatio  = targetSize.width  / size.width
+        let heightRatio = targetSize.height / size.height
+        
+        var newSize: CGSize
+        if(widthRatio > heightRatio) {
+            newSize = CGSize(width: size.width * heightRatio, height: size.height * heightRatio)
+        } else {
+            newSize = CGSize(width: size.width * widthRatio, height: size.height * widthRatio)
+        }
+        
+        let rect = CGRect(origin: .zero, size: newSize)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 1.0)
+        image.draw(in: rect)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
     func addJersey(frontPic: Image, backPic: Image, player: String, team: String, size: Int) {
 //        dIP = true
 //        fIP = true
@@ -205,13 +227,14 @@ struct AddJerseyView: View {
     //        }
     //    }
         let metadata = StorageMetadata()
-        metadata.contentType = "image/jpg"
+        metadata.contentType = "image/jpeg"
         
         let frontFile: String = person + "/" + msec + "_front.jpg"
         let frontFileUrl: String = "https://firebasestorage.googleapis.com/v0/b/jerzboiz.appspot.com/o/" + person + "%2F" + msec + "_front.jpg?alt=media"
 
         let frontRef = storage.reference().child(frontFile)
-        let frontData = frontPic.asUIImage().sd_imageData(as: SDImageFormat.JPEG, compressionQuality: 0.2)
+        let frontData = resizeImage(image: frontPic.asUIImage(), targetSize: CGSize(width: 768, height: 1024))?.jpegData(compressionQuality: 0.2)
+
         
         frontRef.putData(frontData!, metadata: metadata) { (metadata, error) in
             if let error = error {
@@ -228,8 +251,8 @@ struct AddJerseyView: View {
         let backFileUrl: String = "https://firebasestorage.googleapis.com/v0/b/jerzboiz.appspot.com/o/" + person + "%2F" + msec + "_back.jpg?alt=media"
 
         let backRef = storage.reference().child(backFile)
-        let backData = backPic.asUIImage().jpegData(compressionQuality: 0.2)
-        
+        let backData = resizeImage(image: backPic.asUIImage(), targetSize: CGSize(width: 768, height: 1024))?.jpegData(compressionQuality: 0.2)
+
         backRef.putData(backData!, metadata: metadata) { (metadata, error) in
             if let error = error {
                 print("Error while uploading file: ", error)
