@@ -2,6 +2,7 @@ import SwiftUI
 import os
 import Firebase
 import FirebaseStorage
+import SDWebImage
 
 struct AddJerseyView: View {
     
@@ -210,7 +211,7 @@ struct AddJerseyView: View {
         let frontFileUrl: String = "https://firebasestorage.googleapis.com/v0/b/jerzboiz.appspot.com/o/" + person + "%2F" + msec + "_front.jpg?alt=media"
 
         let frontRef = storage.reference().child(frontFile)
-        let frontData = frontPic.asUIImage().jpegData(compressionQuality: 0.2)
+        let frontData = frontPic.asUIImage().sd_imageData(as: SDImageFormat.JPEG, compressionQuality: 0.2)
         
         frontRef.putData(frontData!, metadata: metadata) { (metadata, error) in
             if let error = error {
