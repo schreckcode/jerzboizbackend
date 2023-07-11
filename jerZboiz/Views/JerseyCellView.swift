@@ -47,7 +47,19 @@ struct JerseyCellView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .multilineTextAlignment(.center)
                     Spacer()
-                    Text("Size: \(jersey.size)")
+                    Text("Size:\n \(jersey.size)")
+                        .shadow(radius: 5)
+                        .font(Font(UIFont.systemFont(ofSize: 11)))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Text("Color:\n \(jersey.color)")
+                        .shadow(radius: 5)
+                        .font(Font(UIFont.systemFont(ofSize: 11)))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Text(jersey.cut)
                         .shadow(radius: 5)
                         .font(Font(UIFont.systemFont(ofSize: 11)))
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -55,6 +67,31 @@ struct JerseyCellView: View {
                     Spacer()
 
                 }
+                Spacer()
+                HStack {
+                    Spacer()
+
+                    Text("Source:\n \(jersey.source)")
+                        .shadow(radius: 5)
+                        .font(Font(UIFont.systemFont(ofSize: 11)))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Text("Price:\n \(jersey.price)")
+                        .shadow(radius: 5)
+                        .font(Font(UIFont.systemFont(ofSize: 11)))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+                    Text("Bought:\n \(jersey.yearPurchased)")
+                        .shadow(radius: 5)
+                        .font(Font(UIFont.systemFont(ofSize: 11)))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .multilineTextAlignment(.center)
+                    Spacer()
+
+                }
+                Spacer()
                     
             }
             Spacer()

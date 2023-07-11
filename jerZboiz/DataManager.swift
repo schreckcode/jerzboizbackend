@@ -72,21 +72,26 @@ class DataManager: ObservableObject {
                         let team = data["team"] as? String ?? ""
                         let back = data["back"] as? String ?? ""
                         let front = data["front"] as? String ?? ""
+                        let cut = data["cut"] as? String ?? ""
+                        let price = data["price"] as? String ?? ""
+                        let color = data["color"] as? String ?? ""
+                        let source = data["source"] as? String ?? ""
+                        let yearPurchased = data["yearPurchased"] as? String ?? ""
                         
                         
                         //Self.logger.info("ID \(id) Name: \(name)");
                         if(who == "pat") {
-                            self.patJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back))
+                            self.patJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased))
                             
                         } else if(who == "brian") {
-                            self.brianJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back))
+                            self.brianJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased))
                         } else if(who == "brock") {
-                            self.brianJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back))
+                            self.brianJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased))
                         }
                         
                         if(self.userName == who) {
                             let _ = Logger().info("Appending \(player)")
-                            self.myJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back))
+                            self.myJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased))
                         }
                     }
                 }

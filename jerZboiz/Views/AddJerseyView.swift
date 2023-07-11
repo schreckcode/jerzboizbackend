@@ -13,6 +13,12 @@ struct AddJerseyView: View {
     @State var back: Image? = Image( "jersey")
     @State var team: String = "Atlanta Hawks"
     @State var size: Int = 36
+    @State var price: String = "???"
+    @State var yearPurchased: String = "2022"
+    @State var color: String = "White"
+    @State var cut: String = "Pro Cut"
+    @State var source: String = "eBay"
+
     @State private var playerName: String = ""
     @State var fIP:Bool = false
     @State var bIP:Bool = false
@@ -36,6 +42,11 @@ struct AddJerseyView: View {
         team = "Atlanta Hawks"
         size = 36
         playerName = ""
+        price = "???"
+        yearPurchased = "2022"
+        color = "White"
+        cut = "Pro Cut"
+        source = "eBay"
         uploadInProgress = false
     }
     
@@ -133,17 +144,61 @@ struct AddJerseyView: View {
                                     }
                                 }
                                 .foregroundColor(.white)
-                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))                        .pickerStyle(.menu)
+                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                                .pickerStyle(.menu)
+                                Picker("Color", selection: $color) {
+                                    ForEach(jerseyColors, id: \.self) {
+                                        Text(String($0))
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                                .pickerStyle(.menu)
+                                Picker("Bought", selection: $yearPurchased) {
+                                    ForEach(jerseyYearPurchased, id: \.self) {
+                                        Text(String($0))
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                                .pickerStyle(.menu)
+                            }
+                            HStack {
+                                Picker("Cut", selection: $cut) {
+                                    ForEach(jerseyCut, id: \.self) {
+                                        Text($0)
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                                .pickerStyle(.menu)
+                                Picker("Size", selection: $source) {
+                                    ForEach(jerseySource, id: \.self) {
+                                        Text(String($0))
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                                .pickerStyle(.menu)
+                                Picker("Color", selection: $price) {
+                                    ForEach(jerseyPrice, id: \.self) {
+                                        Text(String($0))
+                                            .foregroundStyle(.white)
+                                    }
+                                }
+                                .foregroundColor(.white)
+                                .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 8))
+                                .pickerStyle(.menu)
                             }
                             Spacer()
                             HStack {
                                 Spacer()
                                 Button(action: {
-                                    front = Image("jersey")
-                                    back = Image("jersey")
-                                    team = ""
-                                    size = 36
-                                    playerName = ""
+                                    clearAll()
                                 }) {
                                     Image(systemName: "photo")
                                         .font(.headline)
@@ -155,7 +210,7 @@ struct AddJerseyView: View {
                                     bIP = true
                                     dIP = true
                                     uploadInProgress = true
-                                    addJersey(frontPic: front ?? Image("jersey"), backPic: back ?? Image("jersey"), player: playerName, team: team, size: size)
+                                    addJersey(frontPic: front ?? Image("jersey"), backPic: back ?? Image("jersey"), player: playerName, team: team, size: size,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased)
                                 }) {
                                     Image(systemName: "photo")
                                         .font(.headline)
@@ -207,7 +262,7 @@ struct AddJerseyView: View {
         
         return newImage
     }
-    func addJersey(frontPic: Image, backPic: Image, player: String, team: String, size: Int) {
+    func addJersey(frontPic: Image, backPic: Image, player: String, team: String, size: Int,cut:String,price:String,color:String,source:String,yearPurchased:String) {
 //        dIP = true
 //        fIP = true
 //        bIP = true
@@ -268,7 +323,8 @@ struct AddJerseyView: View {
 
           let docRef = db.collection(person).document(msec)
 
-        docRef.setData(["id":Int(msec),"player": player, "team": team, "size": size, "front": frontFileUrl, "back": backFileUrl]) { error in
+        docRef.setData(["id":Int(msec),"player": player, "team": team, "size": size, "front": frontFileUrl, "back": backFileUrl,
+                        "cut":cut,"price":price,"color":color,"source":source,"yearPurchased":yearPurchased]) { error in
               if let error = error {
                   print("Error writing document: \(error)")
               } else {

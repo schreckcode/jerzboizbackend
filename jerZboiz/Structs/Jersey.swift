@@ -14,4 +14,9 @@ struct Jersey: Identifiable, Equatable {
     var size: Int
     var front: String
     var back: String
+    var cut: String
+    var price: String
+    var color: String
+    var source: String
+    var yearPurchased: String
 }
