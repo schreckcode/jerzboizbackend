@@ -15,7 +15,7 @@ struct MyProfileView: View {
     @State private var password = ""
     @State private var userIsLoggedIn = false
     @State private var selection: String? = nil
-    
+
     var body: some View {
         let user = Auth.auth().currentUser;
         NavigationView {
@@ -25,9 +25,17 @@ struct MyProfileView: View {
                 VStack {
                     let _ = Logger().info("Selection \(selection ?? "null")")
                     Spacer()
-                    NavigationLink("Add Jersey") { AddJerseyView() }
+                    NavigationLink("Edit My Jerseys") { UserJerseyListView(edit: true ) }
+                        .foregroundColor(.white)
+                                    .padding()
+                                    .background(.blue)
+                                    .cornerRadius(8)
                     Spacer()
-                    NavigationLink("Something Else Jersey") { ContentView() }
+                    NavigationLink("Add Jersey") { AddJerseyView() }
+                        .foregroundColor(.white)
+                                    .padding()
+                                    .background(.blue)
+                                    .cornerRadius(8)
                     Spacer()
                 }
             }

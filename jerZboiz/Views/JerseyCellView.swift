@@ -12,6 +12,9 @@ import SDWebImage
 import os
 struct JerseyCellView: View {
     let jersey: Jersey
+    let edit: Bool
+    @State var presentPopup = false
+
     
     var body: some View {
         HStack {
@@ -38,14 +41,18 @@ struct JerseyCellView: View {
                     .padding(.bottom, 5)
                     .font(Font(UIFont.systemFont(ofSize: 16)))
                     .multilineTextAlignment(.center)
+
+                Text(jersey.team)
+                    .shadow(radius: 5)
+                    .font(Font(UIFont.systemFont(ofSize: 11)))
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .multilineTextAlignment(.center)
+                Spacer()
+
                 HStack {
                     Spacer()
 
-                    Text(jersey.team)
-                        .shadow(radius: 5)
-                        .font(Font(UIFont.systemFont(ofSize: 11)))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .multilineTextAlignment(.center)
+
                     Spacer()
                     Text("Size:\n \(jersey.size)")
                         .shadow(radius: 5)
@@ -59,7 +66,7 @@ struct JerseyCellView: View {
                         .frame(maxWidth: .infinity, alignment: .center)
                         .multilineTextAlignment(.center)
                     Spacer()
-                    Text(jersey.cut)
+                    Text("Cut: \n \(jersey.cut)")
                         .shadow(radius: 5)
                         .font(Font(UIFont.systemFont(ofSize: 11)))
                         .frame(maxWidth: .infinity, alignment: .center)
@@ -95,6 +102,18 @@ struct JerseyCellView: View {
                     
             }
             Spacer()
+            if(edit == true) {
+                Button(action: {
+                  presentPopup = true
+                }) {
+                    Image(systemName: "square.and.pencil")
+                }
+                .popover(isPresented: $presentPopup, arrowEdge: .bottom) {
+                    EditJerseyView(jersey: jersey)
+                }
+                .padding(.horizontal, 10)
+                Spacer()
+            }
         }
         .foregroundColor(.white)
         .frame(minWidth: 150, idealWidth: 360, maxWidth: 500)

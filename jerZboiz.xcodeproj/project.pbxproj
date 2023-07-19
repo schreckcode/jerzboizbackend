@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		281695682A5E0ACD00098A11 /* EditJerseyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281695672A5E0ACD00098A11 /* EditJerseyView.swift */; };
 		2827BA8F2A57753F00342499 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BA8E2A57753F00342499 /* Fonts.swift */; };
 		2827BAB22A578F1200342499 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB12A578F1200342499 /* MainView.swift */; };
 		2827BAB42A578F2800342499 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB32A578F2800342499 /* DataManager.swift */; };
@@ -30,6 +31,7 @@
 		2878CAED2A590D67009F0020 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 2878CAEC2A590D67009F0020 /* SDWebImage */; };
 		2878CAEF2A590D67009F0020 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2878CAEE2A590D67009F0020 /* SDWebImageMapKit */; };
 		2878CAF12A59105F009F0020 /* UserJerseyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2878CAF02A59105F009F0020 /* UserJerseyListView.swift */; };
+		28AD0A482A5F94370032F6F8 /* JerseyRank.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28AD0A472A5F94370032F6F8 /* JerseyRank.swift */; };
 		CD88AC2F2A5348230065AFD5 /* jerZboizApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88AC2E2A5348230065AFD5 /* jerZboizApp.swift */; };
 		CD88AC312A5348230065AFD5 /* AddJerseyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD88AC302A5348230065AFD5 /* AddJerseyView.swift */; };
 		CD88AC332A5348260065AFD5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD88AC322A5348260065AFD5 /* Assets.xcassets */; };
@@ -41,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		281695672A5E0ACD00098A11 /* EditJerseyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditJerseyView.swift; sourceTree = "<group>"; };
 		2827BA8E2A57753F00342499 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		2827BAB12A578F1200342499 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2827BAB32A578F2800342499 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		2878CAE72A590845009F0020 /* Jersey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jersey.swift; sourceTree = "<group>"; };
 		2878CAE92A590A50009F0020 /* JerseyCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JerseyCellView.swift; sourceTree = "<group>"; };
 		2878CAF02A59105F009F0020 /* UserJerseyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserJerseyListView.swift; sourceTree = "<group>"; };
+		28AD0A472A5F94370032F6F8 /* JerseyRank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JerseyRank.swift; sourceTree = "<group>"; };
 		CD88AC2B2A5348230065AFD5 /* jerZboiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = jerZboiz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD88AC2E2A5348230065AFD5 /* jerZboizApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jerZboizApp.swift; sourceTree = "<group>"; };
 		CD88AC302A5348230065AFD5 /* AddJerseyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddJerseyView.swift; sourceTree = "<group>"; };
@@ -116,6 +120,7 @@
 				2827BAB72A57938C00342499 /* ContentView.swift */,
 				2878CAE92A590A50009F0020 /* JerseyCellView.swift */,
 				2878CAF02A59105F009F0020 /* UserJerseyListView.swift */,
+				281695672A5E0ACD00098A11 /* EditJerseyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				2878CAE72A590845009F0020 /* Jersey.swift */,
+				28AD0A472A5F94370032F6F8 /* JerseyRank.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -269,6 +275,7 @@
 				CD88AC312A5348230065AFD5 /* AddJerseyView.swift in Sources */,
 				2878CAE82A590845009F0020 /* Jersey.swift in Sources */,
 				2878CAEA2A590A50009F0020 /* JerseyCellView.swift in Sources */,
+				28AD0A482A5F94370032F6F8 /* JerseyRank.swift in Sources */,
 				2827BAB42A578F2800342499 /* DataManager.swift in Sources */,
 				2827BAB82A57938C00342499 /* ContentView.swift in Sources */,
 				2827BAB22A578F1200342499 /* MainView.swift in Sources */,
@@ -276,6 +283,7 @@
 				2878CAF12A59105F009F0020 /* UserJerseyListView.swift in Sources */,
 				2827BAB62A578F7C00342499 /* MyProfileView.swift in Sources */,
 				CD88AC2F2A5348230065AFD5 /* jerZboizApp.swift in Sources */,
+				281695682A5E0ACD00098A11 /* EditJerseyView.swift in Sources */,
 				CD9632A52A57A98A00317E0C /* UserUtility.swift in Sources */,
 				2878CAE52A58F907009F0020 /* Jerseyutils.swift in Sources */,
 			);

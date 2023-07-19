@@ -13,9 +13,9 @@ struct MainView: View {
 
     var body: some View {
         TabView {
-            UserJerseyListView()
+            UserJerseyListView(edit: false)
                 .tabItem {
-                    Label("J Rankings", systemImage: "figure.pickleball")
+                    Label("J Ranks", systemImage: "figure.pickleball")
                 }
                 MyProfileView()
                     .tabItem {

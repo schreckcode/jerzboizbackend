@@ -4,7 +4,8 @@ import Firebase
 import FirebaseStorage
 import SDWebImage
 
-struct AddJerseyView: View {
+struct EditJerseyView: View {
+    let jersey: Jersey
     
     @State var isShowFrontPicker: Bool = false
     @State var isShowBackPicker: Bool = false
@@ -17,27 +18,20 @@ struct AddJerseyView: View {
     @State var color: String = "White"
     @State var cut: String = "Pro Cut"
     @State var source: String = "eBay"
+    @State private var showConfirmation = false
+
+    @State var frontUrl: String = ""
+    @State var backUrl: String = ""
+
 
     @State private var playerName: String = ""
     @State var fIP:Bool = false
     @State var bIP:Bool = false
     @State var dIP:Bool = false
     @State var uploadInProgress:Bool = false
-    var rankPatDbs:[String] = ["PatRankPat","BrianRankPat","BrockRankPat"]
-    var rankBrianDbs:[String] = ["PatRankBrian","BrianRankBrian","BrockRankBrian"]
-    var rankBrockDbs:[String] = ["PatRankBrock","BrianRankBrock","BrockRankBrock"]
+    @State var first:Bool = true
 
-        init(){
-            UINavigationBar.appearance().largeTitleTextAttributes = [.font : UIFont(name: "Avenir-Book", size: 36)!]
-            for family in UIFont.familyNames {
-                 print(family)
-                 for names in UIFont.fontNames(forFamilyName: family){
-                 print("== \(names)")
-                 }
-            }
-            
-        }
-    
+
     func clearAll() {
         front = Image("jersey")
         back = Image("jersey")
@@ -51,6 +45,21 @@ struct AddJerseyView: View {
         source = "eBay"
         uploadInProgress = false
     }
+    func setVars() {
+        frontUrl = jersey.front
+        backUrl = jersey.back
+        team = jersey.team
+        size = jersey.size
+        playerName = jersey.player
+        price = jersey.price
+        yearPurchased = jersey.yearPurchased
+        color = jersey.color
+        cut = jersey.cut
+        source = jersey.source
+        uploadInProgress = false
+        first = false
+    }
+    
     
     var body: some View {
         NavigationView {
@@ -68,20 +77,13 @@ struct AddJerseyView: View {
                     
                 } else {
                     if(uploadInProgress) {
-                     let _ = clearAll()
+                     Text("Uploaded")
                     }
-                    //                VStack {
-                    //                    VStack {
-                    //                        Text("Blue")
-                    //                    }
-                    //                    .frame(width: gp.size.width, height: gp.size.height * 0.7)
-                    //                    .background(Color.blue)
-                    //                    VStack {
-                    //                        Text("Red")
-                    //                    }
-                    //                    .frame(width: gp.size.width, height: gp.size.height * 0.3)
-                    //                    .background(Color.red)
-                    //                }
+                    
+                    if(first) {
+                       let _ = setVars()
+                        
+                    }
                     
                     ZStack {
                         VStack {
@@ -122,6 +124,7 @@ struct AddJerseyView: View {
                                 "Player Name",
                                 text: $playerName
                             )
+                            .foregroundColor(.black)
                             .disableAutocorrection(true)
                             .padding(4)
                             .overlay(
@@ -207,20 +210,32 @@ struct AddJerseyView: View {
                                     Image(systemName: "photo")
                                         .font(.headline)
                                     Text("Cancel").font(Font(UIFont.systemFont(ofSize: 16)))
-                                }.buttonStyle(.borderedProminent).tint(.red)
+                                }.buttonStyle(.borderedProminent).tint(.pink)
                                 Spacer()
                                 Button(action: {
-                                    fIP = true
-                                    bIP = true
+                                    //fIP = true
+                                    //bIP = true
                                     dIP = true
                                     uploadInProgress = true
-                                    addJersey(frontPic: front ?? Image("jersey"), backPic: back ?? Image("jersey"), player: playerName, team: team, size: size,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased)
+                                    updateJersey(id: jersey.id, frontPic: front ?? Image("jersey"), backPic: back ?? Image("jersey"), player: playerName, team: team, size: size,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased)
                                 }) {
                                     Image(systemName: "photo")
                                         .font(.headline)
                                     Text("Submit").font(Font(UIFont.systemFont(ofSize: 16)))
                                 }.buttonStyle(.borderedProminent).tint(.green)
                                 Spacer()
+                            }
+                            Spacer()
+                            HStack {
+                                Button("Delete Jersey") {
+                                    showConfirmation = true
+                                }
+                                .frame(maxWidth: .infinity)
+                                .confirmationDialog("Delete J For Real?", isPresented: $showConfirmation) {
+                                    Button("Yes, Delete J!", role: .destructive, action: {deleteJersey(id: jersey.id)})
+                                }
+                                .buttonStyle(.borderedProminent).tint(.red).opacity(30.0)
+                                
                             }
                             Spacer()
                             
@@ -236,13 +251,23 @@ struct AddJerseyView: View {
                         ImagePicker(image: self.$back)
                         
                     }
-                    .navigationBarTitle("Pick Image").font(Font(UIFont.systemFont(ofSize: 16)))
+                    .navigationBarTitle("Edit Jersey").font(Font(UIFont.systemFont(ofSize: 16)))
                 }
             }
             .frame(height: .infinity).frame(maxWidth: .infinity)
             .cornerRadius(24).padding(.horizontal, 30)
         }
             
+    }
+    func deleteJersey(id: Int) {
+        let _ = Logger().info("Deleting \(id)")
+        let db = Firestore.firestore()
+        let util = UserUtility()
+        let person = util.getUserFromEmail(email: Auth.auth().currentUser?.email ?? "invalid")
+        if(person != "invalid") {
+            let docRef = db.collection(person).document(String(id))
+            docRef.delete()
+        }
     }
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
         let size = image.size
@@ -266,57 +291,60 @@ struct AddJerseyView: View {
         
         return newImage
     }
-    func addJersey(frontPic: Image, backPic: Image, player: String, team: String, size: Int,cut:String,price:String,color:String,source:String,yearPurchased:String) {
+    
+    func updateJersey(id: Int, frontPic: Image, backPic: Image, player: String, team: String, size: Int,cut:String,price:String,color:String,source:String,yearPurchased:String) {
 //        dIP = true
 //        fIP = true
 //        bIP = true
         let msec: String = String(Date().millisecondsSince1970)
         let util = UserUtility()
+        let userName = util.getUserFromEmail(email: Auth.auth().currentUser?.email ?? "")
         let storage = FirebaseStorage.Storage.storage()
         let person = util.getUserFromEmail(email: Auth.auth().currentUser?.email ?? "invalid")
-        let metadata = StorageMetadata()
-        metadata.contentType = "image/jpeg"
-        
-        let frontFile: String = person + "/" + msec + "_front.jpg"
-        let frontFileUrl: String = "https://firebasestorage.googleapis.com/v0/b/jerzboiz.appspot.com/o/" + person + "%2F" + msec + "_front.jpg?alt=media"
-
-        let frontRef = storage.reference().child(frontFile)
-        let frontData = resizeImage(image: frontPic.asUIImage(), targetSize: CGSize(width: 768, height: 1024))?.jpegData(compressionQuality: 0.2)
-
-        
-        frontRef.putData(frontData!, metadata: metadata) { (metadata, error) in
-            if let error = error {
-                print("Error while uploading file: ", error)
-            }
-            
-            if let metadata = metadata {
-                print("Metadata: ", metadata)
-            }
-            fIP = false
-        }
-        
-        let backFile: String = person + "/" + msec + "_back.jpg"
-        let backFileUrl: String = "https://firebasestorage.googleapis.com/v0/b/jerzboiz.appspot.com/o/" + person + "%2F" + msec + "_back.jpg?alt=media"
-
-        let backRef = storage.reference().child(backFile)
-        let backData = resizeImage(image: backPic.asUIImage(), targetSize: CGSize(width: 768, height: 1024))?.jpegData(compressionQuality: 0.2)
-
-        backRef.putData(backData!, metadata: metadata) { (metadata, error) in
-            if let error = error {
-                print("Error while uploading file: ", error)
-            }
-            
-            if let metadata = metadata {
-                print("Metadata: ", metadata)
-            }
-            bIP = false
-        }
+        let storageRef = storage.reference().child(person)
+//        let metadata = StorageMetadata()
+//        metadata.contentType = "image/jpeg"
+//
+//        let frontFile: String = person + "/" + msec + "_front.jpg"
+//        let frontFileUrl: String = "https://firebasestorage.googleapis.com/v0/b/jerzboiz.appspot.com/o/" + person + "%2F" + msec + "_front.jpg?alt=media"
+//
+//        let frontRef = storage.reference().child(frontFile)
+//        let frontData = resizeImage(image: frontPic.asUIImage(), targetSize: CGSize(width: 768, height: 1024))?.jpegData(compressionQuality: 0.2)
+//
+//
+//        frontRef.putData(frontData!, metadata: metadata) { (metadata, error) in
+//            if let error = error {
+//                print("Error while uploading file: ", error)
+//            }
+//
+//            if let metadata = metadata {
+//                print("Metadata: ", metadata)
+//            }
+//            fIP = false
+//        }
+//
+//        let backFile: String = person + "/" + msec + "_back.jpg"
+//        let backFileUrl: String = "https://firebasestorage.googleapis.com/v0/b/jerzboiz.appspot.com/o/" + person + "%2F" + msec + "_back.jpg?alt=media"
+//
+//        let backRef = storage.reference().child(backFile)
+//        let backData = resizeImage(image: backPic.asUIImage(), targetSize: CGSize(width: 768, height: 1024))?.jpegData(compressionQuality: 0.2)
+//
+//        backRef.putData(backData!, metadata: metadata) { (metadata, error) in
+//            if let error = error {
+//                print("Error while uploading file: ", error)
+//            }
+//
+//            if let metadata = metadata {
+//                print("Metadata: ", metadata)
+//            }
+//            bIP = false
+//        }
         
         let db = Firestore.firestore()
 
-          let docRef = db.collection(person).document(msec)
+          let docRef = db.collection(person).document(String(id))
 
-        docRef.setData(["id":Int(msec),"player": player, "team": team, "size": size, "front": frontFileUrl, "back": backFileUrl,
+        docRef.setData(["id":id,"player": player, "team": team, "size": size, "front": frontUrl, "back": backUrl,
                         "cut":cut,"price":price,"color":color,"source":source,"yearPurchased":yearPurchased]) { error in
               if let error = error {
                   print("Error writing document: \(error)")
@@ -325,153 +353,13 @@ struct AddJerseyView: View {
               }
             dIP = false
           }
-        
-        if(person.lowercased() == "pat") {
-            Task {
-                
-                let countQuery = await awaitedResult(who: "pat") {number in
-                    let collection = db.collection("PatRankPat").document(String(number))
-                    collection.setData(["id":msec, "rank":number])
-                    let collection2 = db.collection("BriankRankPat").document(String(number))
-                    collection2.setData(["id":msec, "rank":number])
-                    let collection3 = db.collection("BrockRankPat").document(String(number))
-                    collection3.setData(["id":msec, "rank":number])
-                }
-            }
-        } else if(person.lowercased() == "brian") {
-            Task {
-                
-                let countQuery = await awaitedResult(who: "brian") {number in
-                    let collection = db.collection("PatRankBrian").document(String(number))
-                    collection.setData(["id":msec, "rank":number])
-                    let collection2 = db.collection("BriankRankBrian").document(String(number))
-                    collection2.setData(["id":msec, "rank":number])
-                    let collection3 = db.collection("BrockRankBrian").document(String(number))
-                    collection3.setData(["id":msec, "rank":number])
-                }
-            }
-        } else if(person.lowercased() == "brock") {
-            Task {
-                
-                let countQuery = await awaitedResult(who: "brock") {number in
-                    let collection = db.collection("PatRankBrock").document(String(number))
-                    collection.setData(["id":msec, "rank":number])
-                    let collection2 = db.collection("BriankRankBrock").document(String(number))
-                    collection2.setData(["id":msec, "rank":number])
-                    let collection3 = db.collection("BrockRankBrock").document(String(number))
-                    collection3.setData(["id":msec, "rank":number])
-                }
-            }
-        }
-    }
-    func awaitedResult(who: String, callback: @escaping (Int) -> Void) {
-        Task {
-            let db = Firestore.firestore()
-            let query = db.collection(who).count
-
-            let snapshot = try await query.getAggregation(source: AggregateSource.server)
-            callback(Int(snapshot.count))
-        }
     }
 }
 
-
-class StorageManager: ObservableObject {
-}
-extension Date {
-    var millisecondsSince1970: Int64 {
-        Int64((self.timeIntervalSince1970 * 1000.0).rounded())
-    }
-    
-    init(milliseconds: Int64) {
-        self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
-    }
-}
-struct ImagePicker: UIViewControllerRepresentable {
-
-    @Environment(\.presentationMode)
-    var presentationMode
-
-    @Binding var image: Image?
-
-    class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-
-        @Binding var presentationMode: PresentationMode
-        @Binding var image: Image?
-
-        init(presentationMode: Binding<PresentationMode>, image: Binding<Image?>) {
-            _presentationMode = presentationMode
-            _image = image
-        }
-
-        func imagePickerController(_ picker: UIImagePickerController,
-                                   didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            let uiImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-            image = Image(uiImage: uiImage)
-            presentationMode.dismiss()
-
-        }
-
-        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-            presentationMode.dismiss()
-        }
-
-    }
-
-    func makeCoordinator() -> Coordinator {
-        return Coordinator(presentationMode: presentationMode, image: $image)
-    }
-
-    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.delegate = context.coordinator
-        return picker
-    }
-
-    func updateUIViewController(_ uiViewController: UIImagePickerController,
-                                context: UIViewControllerRepresentableContext<ImagePicker>) {
-
-    }
-
-}
-extension View {
-// This function changes our View to UIView, then calls another function
-// to convert the newly-made UIView to a UIImage.
-    public func asUIImage() -> UIImage {
-        let controller = UIHostingController(rootView: self)
-        
- // Set the background to be transparent incase the image is a PNG, WebP or (Static) GIF
-        controller.view.backgroundColor = .clear
-        
-        controller.view.frame = CGRect(x: 0, y: CGFloat(Int.max), width: 1, height: 1)
-        UIApplication.shared.windows.first!.rootViewController?.view.addSubview(controller.view)
-        
-        let size = controller.sizeThatFits(in: UIScreen.main.bounds.size)
-        controller.view.bounds = CGRect(origin: .zero, size: size)
-        controller.view.sizeToFit()
-        
-// here is the call to the function that converts UIView to UIImage: `.asUIImage()`
-        let image = controller.view.asUIImage()
-        controller.view.removeFromSuperview()
-        return image
-    }
-}
-
-extension UIView {
-// This is the function to convert UIView to UIImage
-    public func asUIImage() -> UIImage {
-        let renderer = UIGraphicsImageRenderer(bounds: bounds)
-        return renderer.image { rendererContext in
-            layer.render(in: rendererContext.cgContext)
-        }
-    }
-}
-
-
-struct AddJerseyView_Previews: PreviewProvider {
+struct EditJerseyView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AddJerseyView()
+            EditJerseyView(jersey: Jersey(id: 1, player: "player", team: "team", size: 35, front: "front", back: "back",cut:"cut",price:"price",color:"color",source:"source",yearPurchased:"yearPurchased"))
         }
     }
 }
