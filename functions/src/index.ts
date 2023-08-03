@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import * as firestore from "firebase-admin";
+import { DocumentReference } from "firebase-admin/firestore";
 
 firestore.initializeApp();
 
@@ -54,12 +55,9 @@ export const jerseyDelete =
 
       if ((id != null) && (who != null) && (id != "") && (who != "")) {
         const db = firestore.firestore();
-        const snapshot = await db
-          .collection(who.toLowerCase())
-          .count().get();
 
         // Delete the document from the person"s jersey list
-        //const res = await db.collection(who.toLowerCase()).document(String(id)).delete();
+        await db.collection(who.toLowerCase()).doc(String(id)).delete();
 
 
         const patRank = db.collection("PatRank" + who).doc(String(id));
@@ -67,7 +65,25 @@ export const jerseyDelete =
         if (!patDoc.exists) {
           console.log("No such document!");
         } else {
-          console.log("Pat data:", patDoc.data["rank"]);
+          const removeRank = patDoc.data()!.rank
+          console.log("Pat data:", removeRank);
+
+          const bfrankcollection = db.collection("PatRank" + who);
+          const snapshot = await bfrankcollection.get();
+          if (snapshot.empty) {
+            console.log("No matching documents for PatRank.");
+            return;
+          }  
+
+          snapshot.forEach(doc => {
+            const newRank = doc.data()!.rank
+            if(newRank > removeRank)
+            {
+              updateRank(doc.ref, newRank - 1);
+            }
+          });
+
+          await patDoc.ref.delete()
         }
 
         const brockRank = db.collection("BrockRank" + who).doc(String(id));
@@ -75,7 +91,25 @@ export const jerseyDelete =
         if (!brockDoc.exists) {
           console.log("No such document!");
         } else {
-          console.log("Brock data:", brockDoc.data["rank"]);
+          const removeRank = brockDoc.data()!.rank
+          console.log("Brock data:", removeRank);
+
+          const bfrankcollection = db.collection("BrockRank" + who);
+          const snapshot = await bfrankcollection.get();
+          if (snapshot.empty) {
+            console.log("No matching documents for BrockRank.");
+            return;
+          }  
+
+          snapshot.forEach(doc => {
+            const newRank = doc.data()!.rank
+            if(newRank > removeRank)
+            {
+              updateRank(doc.ref, newRank - 1);
+            }
+          });
+
+          await brockDoc.ref.delete()
         }
 
         const brianRank = db.collection("BrianRank" + who).doc(String(id));
@@ -83,7 +117,8 @@ export const jerseyDelete =
         if (!brianDoc.exists) {
           console.log("No such document!");
         } else {
-          console.log("Brian data:", brianDoc.data["rank"]);
+          const removeRank = brianDoc.data()!.rank
+          console.log("Brian data:", removeRank);
 
           const bfrankcollection = db.collection("BrianRank" + who);
           const snapshot = await bfrankcollection.get();
@@ -93,34 +128,16 @@ export const jerseyDelete =
           }  
 
           snapshot.forEach(doc => {
-            console.log(doc.rank);
+            const newRank = doc.data()!.rank
+            if(newRank > removeRank)
+            {
+              updateRank(doc.ref, newRank - 1);
+            }
           });
+
+          await brianDoc.ref.delete()
         }
 
- 
-
-        const oldCount = snapshot.data().count;
-        const newCount = oldCount + 1;
-
-        const newData = {
-          id: id,
-          rank: newCount,
-        };
-
-        const res1 = await firestore.firestore().collection("PatRank" + who)
-          .doc(String(id)).set(newData);
-
-        console.log("Pat Rank resp: " + res1);
-
-        const res2 = await firestore.firestore().collection("BrockRank" + who)
-          .doc(String(id)).set(newData);
-
-        console.log("Brock Rank resp: " + res2);
-
-        const res3 = await firestore.firestore().collection("BrianRank" + who)
-          .doc(String(id)).set(newData);
-
-        console.log("Briank Rank resp: " + res3);
         response.send("All Good!");
       } else {
         console.log("Invalid Parameters");
@@ -128,3 +145,6 @@ export const jerseyDelete =
       }
     });
 
+async function updateRank(doc: DocumentReference, newRank: number) {
+  await doc.update({rank: newRank})
+}
