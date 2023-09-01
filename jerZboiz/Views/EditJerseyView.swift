@@ -19,6 +19,7 @@ struct EditJerseyView: View {
     @State var cut: String = "Pro Cut"
     @State var source: String = "eBay"
     @State private var showConfirmation = false
+    @Environment(\.colorScheme) var colorScheme
 
     @State var frontUrl: String = ""
     @State var backUrl: String = ""
@@ -52,10 +53,21 @@ struct EditJerseyView: View {
         size = jersey.size
         playerName = jersey.player
         price = jersey.price
-        yearPurchased = jersey.yearPurchased
-        color = jersey.color
-        cut = jersey.cut
-        source = jersey.source
+        if(jersey.yearPurchased != "") {
+            yearPurchased = jersey.yearPurchased
+        }
+        if(jersey.color != "") {
+            
+            color = jersey.color
+        }
+        
+        if(jersey.cut != "") {
+            cut = jersey.cut
+        }
+        if(jersey.source != "") {
+            
+            source = jersey.source
+        }
         uploadInProgress = false
         first = false
     }
@@ -124,7 +136,7 @@ struct EditJerseyView: View {
                                 "Player Name",
                                 text: $playerName
                             )
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .disableAutocorrection(true)
                             .padding(4)
                             .overlay(
@@ -259,16 +271,56 @@ struct EditJerseyView: View {
         }
             
     }
+    
     func deleteJersey(id: Int) {
-        let _ = Logger().info("Deleting \(id)")
-        let db = Firestore.firestore()
+        let logger = Logger()
+        logger.info("Deleting J")
+        
+        let defaultSession = URLSession(configuration: .default)
+        
+        var dataTask: URLSessionDataTask?
+        
+        // 1
+        dataTask?.cancel()
         let util = UserUtility()
+
         let person = util.getUserFromEmail(email: Auth.auth().currentUser?.email ?? "invalid")
         if(person != "invalid") {
-            let docRef = db.collection(person).document(String(id))
-            docRef.delete()
+            
+            // 2
+            if var urlComponents = URLComponents(string: "https://us-central1-jerzboiz.cloudfunctions.net/jerseyDelete" ) {
+                urlComponents.query = "id=\(id)&who=\(person)"
+                
+                // 3
+                guard let url = urlComponents.url else {
+                    return
+                }
+                // 4
+                dataTask =
+                defaultSession.dataTask(with: url) { data, response, error in
+                    defer {
+                        dataTask = nil
+                    }
+                    // 5
+                    if let error = error {
+                        logger.error("Error \(error.localizedDescription)")
+                        return
+                    } else if
+                        let data = data,
+                        let response = response as? HTTPURLResponse,
+                        response.statusCode == 200 {
+                        logger.info("Data \(data)")
+                    }
+                }
+            }
+            // 7
+            dataTask?.resume()
+        } else {
+            logger.error("Invalid Person for Delete")
         }
     }
+    
+    
     func resizeImage(image: UIImage, targetSize: CGSize) -> UIImage? {
         let size = image.size
         
@@ -343,7 +395,7 @@ struct EditJerseyView: View {
         let db = Firestore.firestore()
 
           let docRef = db.collection(person).document(String(id))
-
+        let _ = Logger().info("Setting cut \(cut)")
         docRef.setData(["id":id,"player": player, "team": team, "size": size, "front": frontUrl, "back": backUrl,
                         "cut":cut,"price":price,"color":color,"source":source,"yearPurchased":yearPurchased]) { error in
               if let error = error {

@@ -13,6 +13,9 @@
 		2827BAB42A578F2800342499 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB32A578F2800342499 /* DataManager.swift */; };
 		2827BAB62A578F7C00342499 /* MyProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB52A578F7C00342499 /* MyProfileView.swift */; };
 		2827BAB82A57938C00342499 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2827BAB72A57938C00342499 /* ContentView.swift */; };
+		2830429D2AA0B7F9006C85E8 /* JerseyRankCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2830429C2AA0B7F9006C85E8 /* JerseyRankCellView.swift */; };
+		2848DE402A9E14E1007B75CD /* RankJerseyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2848DE3F2A9E14E1007B75CD /* RankJerseyView.swift */; };
+		2848DE432A9E16BB007B75CD /* RankJerseyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2848DE422A9E16BB007B75CD /* RankJerseyViewModel.swift */; };
 		2878CACD2A58D12D009F0020 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2878CACC2A58D12D009F0020 /* FirebaseAnalytics */; };
 		2878CACF2A58D12D009F0020 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2878CACE2A58D12D009F0020 /* FirebaseAnalyticsSwift */; };
 		2878CAD12A58D12D009F0020 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2878CAD02A58D12D009F0020 /* FirebaseAuth */; };
@@ -49,6 +52,9 @@
 		2827BAB32A578F2800342499 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2827BAB52A578F7C00342499 /* MyProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileView.swift; sourceTree = "<group>"; };
 		2827BAB72A57938C00342499 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2830429C2AA0B7F9006C85E8 /* JerseyRankCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JerseyRankCellView.swift; sourceTree = "<group>"; };
+		2848DE3F2A9E14E1007B75CD /* RankJerseyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankJerseyView.swift; sourceTree = "<group>"; };
+		2848DE422A9E16BB007B75CD /* RankJerseyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankJerseyViewModel.swift; sourceTree = "<group>"; };
 		284DD85B2A59D33E0058948B /* jerZboiz.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = jerZboiz.entitlements; sourceTree = "<group>"; };
 		2878CAE42A58F907009F0020 /* Jerseyutils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jerseyutils.swift; sourceTree = "<group>"; };
 		2878CAE72A590845009F0020 /* Jersey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Jersey.swift; sourceTree = "<group>"; };
@@ -121,8 +127,18 @@
 				2878CAE92A590A50009F0020 /* JerseyCellView.swift */,
 				2878CAF02A59105F009F0020 /* UserJerseyListView.swift */,
 				281695672A5E0ACD00098A11 /* EditJerseyView.swift */,
+				2848DE3F2A9E14E1007B75CD /* RankJerseyView.swift */,
+				2830429C2AA0B7F9006C85E8 /* JerseyRankCellView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		2848DE412A9E16A5007B75CD /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2848DE422A9E16BB007B75CD /* RankJerseyViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		2878CAE62A590836009F0020 /* Structs */ = {
@@ -153,6 +169,7 @@
 		CD88AC2D2A5348230065AFD5 /* jerZboiz */ = {
 			isa = PBXGroup;
 			children = (
+				2848DE412A9E16A5007B75CD /* ViewModels */,
 				284DD85B2A59D33E0058948B /* jerZboiz.entitlements */,
 				2878CAE62A590836009F0020 /* Structs */,
 				2827BAB02A578F0400342499 /* Views */,
@@ -275,7 +292,9 @@
 				CD88AC312A5348230065AFD5 /* AddJerseyView.swift in Sources */,
 				2878CAE82A590845009F0020 /* Jersey.swift in Sources */,
 				2878CAEA2A590A50009F0020 /* JerseyCellView.swift in Sources */,
+				2830429D2AA0B7F9006C85E8 /* JerseyRankCellView.swift in Sources */,
 				28AD0A482A5F94370032F6F8 /* JerseyRank.swift in Sources */,
+				2848DE402A9E14E1007B75CD /* RankJerseyView.swift in Sources */,
 				2827BAB42A578F2800342499 /* DataManager.swift in Sources */,
 				2827BAB82A57938C00342499 /* ContentView.swift in Sources */,
 				2827BAB22A578F1200342499 /* MainView.swift in Sources */,
@@ -285,6 +304,7 @@
 				CD88AC2F2A5348230065AFD5 /* jerZboizApp.swift in Sources */,
 				281695682A5E0ACD00098A11 /* EditJerseyView.swift in Sources */,
 				CD9632A52A57A98A00317E0C /* UserUtility.swift in Sources */,
+				2848DE432A9E16BB007B75CD /* RankJerseyViewModel.swift in Sources */,
 				2878CAE52A58F907009F0020 /* Jerseyutils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,7 +433,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = jerZboiz/jerZboiz.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.9;
+				CURRENT_PROJECT_VERSION = 1.19;
 				DEVELOPMENT_ASSET_PATHS = "\"jerZboiz/Preview Content\"";
 				DEVELOPMENT_TEAM = 4AXYPNKHSG;
 				ENABLE_PREVIEWS = YES;
@@ -423,11 +443,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.trixtoo.jerZboiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -443,7 +464,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = jerZboiz/jerZboiz.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.9;
+				CURRENT_PROJECT_VERSION = 1.19;
 				DEVELOPMENT_ASSET_PATHS = "\"jerZboiz/Preview Content\"";
 				DEVELOPMENT_TEAM = 4AXYPNKHSG;
 				ENABLE_PREVIEWS = YES;
@@ -453,11 +474,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 1.19;
 				PRODUCT_BUNDLE_IDENTIFIER = com.trixtoo.jerZboiz;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

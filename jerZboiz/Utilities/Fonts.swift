@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 struct AppFontName {
-  static let regular = "Avenir-Book"
+  static let regular = "NBABulls"
   static let bold = "Avenir-Book"
   static let lightAlt = "Avenir-Book"
 }

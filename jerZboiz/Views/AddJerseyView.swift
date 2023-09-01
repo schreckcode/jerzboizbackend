@@ -326,43 +326,7 @@ struct AddJerseyView: View {
             dIP = false
           }
         
-        if(person.lowercased() == "pat") {
-            Task {
-                
-                let countQuery = await awaitedResult(who: "pat") {number in
-                    let collection = db.collection("PatRankPat").document(String(number))
-                    collection.setData(["id":msec, "rank":number])
-                    let collection2 = db.collection("BriankRankPat").document(String(number))
-                    collection2.setData(["id":msec, "rank":number])
-                    let collection3 = db.collection("BrockRankPat").document(String(number))
-                    collection3.setData(["id":msec, "rank":number])
-                }
-            }
-        } else if(person.lowercased() == "brian") {
-            Task {
-                
-                let countQuery = await awaitedResult(who: "brian") {number in
-                    let collection = db.collection("PatRankBrian").document(String(number))
-                    collection.setData(["id":msec, "rank":number])
-                    let collection2 = db.collection("BriankRankBrian").document(String(number))
-                    collection2.setData(["id":msec, "rank":number])
-                    let collection3 = db.collection("BrockRankBrian").document(String(number))
-                    collection3.setData(["id":msec, "rank":number])
-                }
-            }
-        } else if(person.lowercased() == "brock") {
-            Task {
-                
-                let countQuery = await awaitedResult(who: "brock") {number in
-                    let collection = db.collection("PatRankBrock").document(String(number))
-                    collection.setData(["id":msec, "rank":number])
-                    let collection2 = db.collection("BriankRankBrock").document(String(number))
-                    collection2.setData(["id":msec, "rank":number])
-                    let collection3 = db.collection("BrockRankBrock").document(String(number))
-                    collection3.setData(["id":msec, "rank":number])
-                }
-            }
-        }
+        addJersey(id: Int(msec)!)
     }
     func awaitedResult(who: String, callback: @escaping (Int) -> Void) {
         Task {
@@ -371,6 +335,54 @@ struct AddJerseyView: View {
 
             let snapshot = try await query.getAggregation(source: AggregateSource.server)
             callback(Int(snapshot.count))
+        }
+    }
+    
+    func addJersey(id: Int) {
+        let logger = Logger()
+        logger.info("Adding J")
+        
+        let defaultSession = URLSession(configuration: .default)
+        
+        var dataTask: URLSessionDataTask?
+        
+        // 1
+        dataTask?.cancel()
+        let util = UserUtility()
+
+        let person = util.getUserFromEmail(email: Auth.auth().currentUser?.email ?? "invalid")
+        if(person != "invalid") {
+            
+            // 2
+            if var urlComponents = URLComponents(string: "https://us-central1-jerzboiz.cloudfunctions.net/jerseyAdded" ) {
+                urlComponents.query = "id=\(id)&who=\(person)"
+                
+                // 3
+                guard let url = urlComponents.url else {
+                    return
+                }
+                // 4
+                dataTask =
+                defaultSession.dataTask(with: url) { data, response, error in
+                    defer {
+                        dataTask = nil
+                    }
+                    // 5
+                    if let error = error {
+                        logger.error("Error \(error.localizedDescription)")
+                        return
+                    } else if
+                        let data = data,
+                        let response = response as? HTTPURLResponse,
+                        response.statusCode == 200 {
+                        logger.info("Data \(data)")
+                    }
+                }
+            }
+            // 7
+            dataTask?.resume()
+        } else {
+            logger.error("Invalid Person for Add")
         }
     }
 }

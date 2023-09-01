@@ -16,10 +16,14 @@ struct MainView: View {
             UserJerseyListView(edit: false)
                 .tabItem {
                     Label("J Ranks", systemImage: "figure.pickleball")
+                        .font(Font(UIFont.systemFont(ofSize: 11)))
+
                 }
                 MyProfileView()
                     .tabItem {
-                        Label("My Js", systemImage: "square.and.pencil")
+                        Label("My Stuff", systemImage: "square.and.pencil")
+                            .font(Font(UIFont.systemFont(ofSize: 11)))
+
                     }
         }.toolbar(.visible)
     }

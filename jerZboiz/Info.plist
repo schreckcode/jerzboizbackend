@@ -6,8 +6,8 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>bulls</string>
-		<string>NBA Bulls</string>
+		<string>bulls.ttf</string>
+		<string>NBA Bulls.ttf</string>
 	</array>
 </dict>
 </plist>

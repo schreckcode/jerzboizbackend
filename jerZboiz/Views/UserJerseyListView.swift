@@ -33,15 +33,15 @@ struct UserJerseyListView: View {
                 ScrollView {
                     
                     LazyVStack {
-                        var jerseyList = dataManager.getJList(whoJ: whosJs)
+                        let jerseyList = dataManager.getJList(whoJ: whosJs)
                         let _ = Logger().info("1. \(jerseyList.count)")
-                        var rankList = dataManager.getRankList(whoJ: whosJs, whoRank: whosRank)
+                        let rankList = dataManager.getRankList(whoJ: whosJs, whoRank: whosRank)
                         let _ = Logger().info("2 \(rankList.count)")
 
-                        var sortedList = getSortedList(list: rankList)
+                        let sortedList = getSortedList(list: rankList)
                         let _ = Logger().info("3. \(sortedList.count)")
 
-                        var filteredList = getFilteredList(list: sortedList, jList: jerseyList)
+                        let filteredList = getFilteredList(list: sortedList, jList: jerseyList)
                         if(filteredList.count > 0) {
                             ForEach(filteredList) { jersey in
                                 
@@ -52,8 +52,12 @@ struct UserJerseyListView: View {
                                         .bold()
                                         .shadow(radius: 5)
                                         .font(Font(UIFont.systemFont(ofSize: 16)))
-                                    
-                                    JerseyCellView(jersey: jerseyList.first(where: {$0.id == jersey.id})! , edit: edit)
+
+                                    if let jerz = jerseyList.first(where: {$0.id == jersey.id}) {
+                                        JerseyCellView(jersey: jerz , edit: edit)
+                                    } else {
+                                        let _ = Logger().info("Cannot find \(jersey.id)")
+                                    }
                                 }
                             }
                         } else {
@@ -104,9 +108,6 @@ struct UserJerseyListView: View {
         }.refreshable {
             do {
                 dataManager.refresh()
-            } catch {
-                // Something went wrong; clear the news
-                logger.info("Something Bad in Refresh")
             }
         }.searchable(text: $searchText)
     }

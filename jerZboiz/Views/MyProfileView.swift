@@ -37,6 +37,12 @@ struct MyProfileView: View {
                                     .background(.blue)
                                     .cornerRadius(8)
                     Spacer()
+                    NavigationLink("Rank Jerseys") { RankJerseyView() }
+                        .foregroundColor(.white)
+                                    .padding()
+                                    .background(.blue)
+                                    .cornerRadius(8)
+                    Spacer()
                 }
             }
         }
