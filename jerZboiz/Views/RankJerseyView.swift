@@ -18,10 +18,12 @@ struct RankJerseyView: View {
     //@EnvironmentObject var dataManager: DataManager
     @StateObject var viewModel = RankJerseyViewModel()
     @State private var whosJs = "Pat"
+    @State private var expandedView = "More Info"
 
     let changeOccurred:Bool = false
     let logger = Logger()
     let whosJsOptions = ["Brock", "Brian", "Pat"]
+    let expandedOptions = ["More Info", "Less Info"]
 
     var body: some View {
         let array = viewModel.jerseyList
@@ -37,7 +39,7 @@ struct RankJerseyView: View {
                                     .bold()
                                     .shadow(radius: 5)
                                     .font(Font(UIFont.systemFont(ofSize: 16)))
-                                JerseyRankCellView(jerseyRank: jerz, whosJ: viewModel.rankingWho)
+                                JerseyRankCellView(jerseyRank: jerz, whosJ: viewModel.rankingWho, expanded: expandedView)
                                     .onDrag({
                                         viewModel.draggedItem = jerz
                                         return NSItemProvider(item: nil, typeIdentifier: String(jerz.id))
@@ -61,6 +63,12 @@ struct RankJerseyView: View {
                         viewModel.refresh()
                     })
                     .pickerStyle(.segmented)
+                    Picker("Select a paint color", selection: $expandedView) {
+                        ForEach(expandedOptions, id: \.self) {
+                            Text("\($0)")
+                        }
+                    }
+                    .pickerStyle(.menu)
 
                 }
                 if(viewModel.dropOccurredFlag) {

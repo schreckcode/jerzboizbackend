@@ -262,6 +262,8 @@ class DataManager: ObservableObject {
                             self.brianJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased))
                         } else if(who == "Brock") {
                             self.brockJs.append(Jersey(id: id, player: player, team: team, size: size, front: front, back: back,cut:cut,price:price,color:color,source:source,yearPurchased:yearPurchased))
+                        } else {
+                            let _ = Logger().info("WHAT THE HECK")
                         }
                         
                         if(self.userName == who) {

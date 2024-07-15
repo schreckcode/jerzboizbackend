@@ -284,7 +284,7 @@ struct EditJerseyView: View {
         dataTask?.cancel()
         let util = UserUtility()
 
-        let person = util.getUserFromEmail(email: Auth.auth().currentUser?.email ?? "invalid")
+        let person = util.getCapsUserFromEmail(email: Auth.auth().currentUser?.email ?? "invalid")
         if(person != "invalid") {
             
             // 2

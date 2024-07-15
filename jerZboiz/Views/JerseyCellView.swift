@@ -25,12 +25,14 @@ struct JerseyCellView: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 80)
                     .shadow(radius: 5)
+                    .cornerRadius(20)
                     .padding(.leading, 10)
             } placeholder: {
                 Image("jersey")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 80)
+                    .cornerRadius(20)
                     .shadow(radius: 5)
                     .padding(.leading, 10)
             }

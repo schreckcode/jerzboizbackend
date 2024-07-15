@@ -30,7 +30,8 @@ class RankJerseyViewModel: ObservableObject {
             if let snapshot = snapshot {
                 for document in snapshot.documents {
                     let data = document.data()
-                    
+                    let _ = Logger().info("2: \(data)")
+
                     let rank = data["rank"] as? Int ?? -1
                     let id = data["id"] as? Int ?? -1
                     let userRank = JerseyRank(id: id, rank: rank)
@@ -82,7 +83,7 @@ class RankJerseyViewModel: ObservableObject {
 
                 for document in snapshot.documents {
                     let data = document.data()
-                    
+                    let _ = Logger().info("1: \(data)")
                     let rank = data["rank"] as? Int ?? -1
                     let id = data["id"] as? Int ?? -1
                     let userRank = JerseyRank(id: id, rank: rank)
