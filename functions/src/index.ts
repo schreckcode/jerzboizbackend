@@ -20,10 +20,15 @@ export const jerseyAdded =
           .count().get();
 
         const oldCount = snapshot.data().count;
-        const newCount = oldCount + 1;
+        console.log("Old Count: " + oldCount);
+        const newCount = oldCount;
 
-        const newData = {
-          id: id,
+        type Data = {
+          id: number,
+          rank: number,
+        }
+        const newData: Data = {
+          id: Number(id),
           rank: newCount,
         };
 
